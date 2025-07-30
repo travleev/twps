@@ -54,6 +54,31 @@ The package is published on PyPI: https://pypi.org/project/twps/. The preffered 
 
   >pip install twps
 
+
+Usage
+_____
+
+From command line: when installed, the `twps` command becomes available.
+
+.. code-block console
+   twps -'a = 1' --'b 1 2 "a"' template.t
+
+Here, ``template.t`` is a file containing code snippets to be evaluated/executed.
+The command line argument starting with `-` specifies the code to be executed/evaluated
+before processing the template. The command line argument starting with `--`
+specifies a sequence of values of a variable. The template will be processed
+for each value from the sequence.
+
+From Python:
+
+.. code-block python
+    from twps import pre_pro
+
+    pre_pro(fname=templateFileName, level='main')
+
+
+    
+
 Getting help
 --------------
 For command line options see ``readme.rst`` in the ``twps`` folder or run the
