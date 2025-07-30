@@ -1,3 +1,10 @@
+import importlib.resources as imres
+
+
+def getPathToPackageFile(fileName):
+    return imres.files(__package__) / fileName
+
+
 def variants(gls):
     """
     Yields all possible variants of the parameter values.

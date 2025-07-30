@@ -30,13 +30,14 @@ from __future__ import print_function
 
 from sys import argv
 from os import path
-import twps  # from twps import pre_pro, params
+from .utils import getPathToPackageFile, params
+from .text_with_snippets import pre_pro
 
 
 def main():
     if len(argv) < 2 or '--help' in ''.join(argv[1:]).lower():
-        readme = path.join(path.dirname(twps.__file__), 'readme.rst')
-        with open(readme, 'r') as f:
+        readmePath = getPathToPackageFile('../README.rst')
+        with open(readmePath, 'r') as f:
             msg = f.read()
         print(msg)
     else:
@@ -51,7 +52,7 @@ def main():
         templates = []
         for a in argv[1:]:
             if len(a) > 2 and a[:2] == '--':
-                nvi = twps.params(a[2:])
+                nvi = params(a[2:])
                 clp.append(nvi)
             elif len(a) > 1 and a[:1] == '-':
                 # this is a snippet
@@ -66,8 +67,4 @@ def main():
         if preamb:
             print('Command-line snippet:', preamb)
         for t in templates:
-            twps.pre_pro(fname=t, level='main', preamb=preamb, clp=clp)
-
-
-if __name__ == '__main__':
-    main()
+            pre_pro(fname=t, level='main', preamb=preamb, clp=clp)

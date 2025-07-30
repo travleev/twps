@@ -32,7 +32,7 @@ pre_pro() function can be used.
 """
 
 from .text_with_snippets import pre_pro
-from .utils import params
+from .ppp import main
 
 try:
     from .version import version
