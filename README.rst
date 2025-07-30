@@ -50,18 +50,19 @@ The following example shows a template file (i.e. the file to be processed with 
 
 Install
 ----------
-The package is published on PyPI: https://pypi.org/project/twps/. The preffered way to install is:
+The package is published on PyPI: https://pypi.org/project/twps/. The preffered way to install is::
 
   >pip install twps
 
 
 Usage
-_____
+-------
 
 From command line: when installed, the `twps` command becomes available.
 
-.. code-block console
-   twps -'a = 1' --'b 1 2 "a"' template.t
+.. code-block:: console
+
+   >twps -'a = 1' --'b 1 2 "a"' template.t
 
 Here, ``template.t`` is a file containing code snippets to be evaluated/executed.
 The command line argument starting with `-` specifies the code to be executed/evaluated
@@ -71,7 +72,7 @@ for each value from the sequence.
 
 From Python:
 
-.. code-block python
+.. code-block:: python
     from twps import pre_pro
 
     pre_pro(fname=templateFileName, level='main')
