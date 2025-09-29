@@ -77,6 +77,7 @@ class _Log(object):
     To print out log information. Implemented as a class to contain
     snippet-specific information as instance properties.
     """
+
     def __init__(self, tname, level):
         """
         ``tname`` -- The current template filename
@@ -85,6 +86,8 @@ class _Log(object):
         """
         self.tname = tname  # Current template filename
         self.level = level  # Log level
+        self._minLevel = None
+        self._maxLevel = None
         return
 
     def __call__(self, *args, **kwargs):
@@ -106,6 +109,19 @@ class _Log(object):
 
         if mlev <= self.level:
             print(sign, msg, file=sys.stdout)
+
+        if self._minLevel is None or self._minLevel > mlev:
+            self._minLevel = mlev
+        if self._maxLevel is None or self._maxLevel < mlev:
+            self._maxLevel = mlev
+
+    @property
+    def levelRange(self):
+        """
+        Returns the tuple (minLevel, maxLevel) for all logs,
+        given before.
+        """
+        return (self._minLevel, self._maxLevel)
 
 
 class _WritableObject:
